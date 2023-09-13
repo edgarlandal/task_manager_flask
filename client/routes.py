@@ -34,7 +34,7 @@ def task_list():
 
 
 @app.get("/tasks/edit/<int:pk>")
-def edit_task(pk):
+def edit_task(pk: int):
     url = "%s/%s" % (SERVER_URL, pk)
     response = requests.get(url)
 
@@ -47,13 +47,15 @@ def edit_task(pk):
         response.status_code,
     )
 
+
 @app.post("/tasks/edit/<int:pk>")
-def edit_task_req(pk):
+def edit_task_req(pk: int):
     url = "%s/%s" % (SERVER_URL, pk)
+    print(pk)
     task_data = request.form
     response = requests.put(url, json=task_data)
 
     if response.status_code == 204:
         return render_template("sucess.html")
-    
-    return(render_template("erro.html", response.status_code), response.status_code)
+
+    return (render_template("error.html", response.status_code), response.status_code)

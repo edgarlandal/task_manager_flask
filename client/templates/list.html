@@ -20,7 +20,7 @@
       <th scope="row">{{ task["id"] }}</th>
       <td>{{ task["summary"] }}</td>
       <td>{{ task["description"] }}</td>
-      <td><a href="{{ url_for('edit_task'), pk=task['id'] }}">Edit</a> | Delete</td>
+      <td><a href="{{ url_for('edit_task', pk=task['id'] )}}">Edit</a> | Delete</td>
     </tr>
     {% endfor %}
   </tbody>
