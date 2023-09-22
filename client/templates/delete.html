@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block title%}Delete Task{% endblock title %} 
+
+{% block content %}
+<h1>Edit Task</h1>
+
+<form method="POST" action="{{ url_for('delete_task_req', pk=task['id']) }}">
+    <h4>Are you sure delte this task?</h4>
+    <input type="submit" value="Delete" class="btn btn-danger">
+    <a href="{{ url_for('task_list') }}" class="btn btn-success ">Cancel</a>
+</form>
+
+{% endblock content %}

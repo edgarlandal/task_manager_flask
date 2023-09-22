@@ -33,6 +33,49 @@ def task_list():
     return render_template("error.html", err=response.status_code), response.status_code
 
 
+@app.get("/tasks/new")
+def new_task():
+    return render_template("new.html"), 200
+
+
+@app.post("/tasks/new")
+def new_task_req():
+    task_data = request.form
+    response = requests.post(SERVER_URL, json=task_data)
+
+    if response.status_code == 204:
+        return render_template("sucess.html")
+
+    return (render_template("error.html", response.status_code), response.status_code)
+
+
+@app.get("/task/delete/<int:pk>")
+def delete_task(pk: int):
+    url = "%s/%s" % (SERVER_URL, pk)
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        task_data = response.json().get("task")
+        return render_template("delete.html", task=task_data)
+
+    return (
+        render_template("error.html", err=response.status_code),
+        response.status_code,
+    )
+
+
+@app.post("/task/delete/<int:pk>")
+def delete_task_req(pk: int):
+    url = "%s/%s" % (SERVER_URL, pk)
+    print(url)
+    response = requests.delete(url)
+
+    if response.status_code == 204:
+        return render_template("sucess.html")
+
+    return (render_template("error.html", response.status_code), response.status_code)
+
+
 @app.get("/tasks/edit/<int:pk>")
 def edit_task(pk: int):
     url = "%s/%s" % (SERVER_URL, pk)
@@ -43,7 +86,7 @@ def edit_task(pk: int):
         return render_template("edit.html", task=task_data)
 
     return (
-        render_template("edit.html", err=response.status_code),
+        render_template("error.html", err=response.status_code),
         response.status_code,
     )
 

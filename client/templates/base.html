@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
+      <div class="container">
         <a class="navbar-brand" href="{{url_for('index')}}">TASK MANAGER</a>
         <button
           class="navbar-toggler"
@@ -31,7 +31,9 @@
           <div class="navbar-nav">
             <a class="nav-link" href="{{url_for('index')}}">Home</a>
             <a class="nav-link" href="{{url_for('about_me')}}">About</a>
-            <a class="nav-link" href="{{url_for('task_list')}}">Task</a>
+            <a class="nav-link" href="{{url_for('task_list')}}">Task</a>            
+            <a class="nav-link" href="{{url_for('new_task')}}">Create Task</a>
+
           </div>
         </div>
       </div>

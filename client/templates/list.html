@@ -1,28 +1,42 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% block title%}Tasks{% endblock title %} {% block
+content %}
+<div
+  class="d-flex flex-column justify-content-center align-items-center vh-100  "
+>
+  <h1>Tasks</h1>
 
-{% block title%}Tasks{% endblock title %} 
-
-{% block content %}
-<h1>Tasks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Summary</th>
-      <th scope="col">Description</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for task in tasks %}
-    <tr>
-      <th scope="row">{{ task["id"] }}</th>
-      <td>{{ task["summary"] }}</td>
-      <td>{{ task["description"] }}</td>
-      <td><a href="{{ url_for('edit_task', pk=task['id'] )}}">Edit</a> | Delete</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table class="table table-hover shadow-lg ">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Summary</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <th scope="row">{{ task["id"] }}</th>
+        <td>{{ task["summary"] }}</td>
+        <td>{{ task["description"] }}</td>
+        <td class="flex">
+          <a
+            href="{{ url_for('edit_task', pk=task['id'] )}}"
+            class="btn btn-secondary"
+            >Edit</a
+          >
+          |
+          <a
+            href="{{ url_for('delete_task', pk=task['id'] )}}"
+            class="btn btn-danger"
+          >
+            Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock content %}
